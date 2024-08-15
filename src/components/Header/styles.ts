@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header`
     align-items: center;
     gap: 0.75rem;
 
-    div {
+    .location {
       background: ${props => props.theme.colors["purple-light"]};
       border-radius: 8px;
       padding: 0.5rem;
@@ -37,6 +37,7 @@ export const HeaderContainer = styled.header`
       border-radius: 8px;
       padding: 0.5rem;
       cursor: pointer;
+      position: relative;
 
       display: flex;
       align-items: center;
@@ -44,6 +45,22 @@ export const HeaderContainer = styled.header`
 
       svg {
         color: ${props => props.theme.colors["yellow-dark"]};
+      }
+
+      .badge {
+        height: 20px;
+        width: 20px;
+        background: ${props => props.theme.colors["yellow-dark"]};
+        border-radius: 9999px;
+        position: absolute;
+        top: -8px;
+        right: -8px;
+
+        span {
+          font-size: ${props => props.theme.fonts.roboto["text-s"]}px;
+          font-weight: bold;
+          color: ${props => props.theme.colors.white};
+        }
       }
     }
   }

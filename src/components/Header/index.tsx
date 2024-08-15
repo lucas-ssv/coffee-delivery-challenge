@@ -7,12 +7,15 @@ export function Header() {
     <HeaderContainer>
       <img src={logoCoffeeDelivery} alt="" />
       <nav>
-        <div>
+        <div className='location'>
           <MapPin size={22} weight="fill" />
           <span>Porto Alegre, RS</span>
         </div>
         <button type="button">
           <ShoppingCart size={22} weight="fill" />
+          <div className='badge'>
+            <span>3</span>
+          </div>
         </button>
       </nav>
     </HeaderContainer>
