@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.main`
-  width: calc(100% - 304px);
-  margin: 0 auto;
-  padding: 0 1rem;
-
   .intro {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
