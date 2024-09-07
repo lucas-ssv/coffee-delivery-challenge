@@ -1,6 +1,7 @@
-import { Minus, Plus, ShoppingCartSimple } from "@phosphor-icons/react";
+import { ShoppingCartSimple } from "@phosphor-icons/react";
 import capuccino from '../../../../../../assets/capuccino.svg'
 import { CoffeeCardItemContainer } from "./styles";
+import { Counter } from "../../../../../../components/Counter";
 
 export function CoffeeCardItem() {
   return (
@@ -20,16 +21,8 @@ export function CoffeeCardItem() {
             <span>9,90</span>
           </span>
           <div className="card-actions">
-            <div className="card-counter">
-              <button type="button">
-                <Minus size={14} />
-              </button>
-              <span>1</span>
-              <button type="button">
-                <Plus size={14} />
-              </button>
-            </div>
-            <button type="button">
+            <Counter style={{ height: 38 }} />
+            <button className="cart-button" type="button">
               <ShoppingCartSimple size={22} weight="fill" />
             </button>
           </div>

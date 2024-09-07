@@ -78,30 +78,8 @@ export const CoffeeCardItemContainer = styled.li`
         justify-content: center;
         gap: 0.5rem;
 
-        .card-counter {
-          background: ${props => props.theme.colors["base-button"]};
-          border-radius: 8px;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.25rem;
-
-          button {
-            background: transparent;
-            color: ${props => props.theme.colors.purple};
-            border: 0;
-            padding: 0.75rem 0.5rem;
-            cursor: pointer;
-          }
-
-          span {
-            font-size: ${props => props.theme.fonts.roboto["text-m"]};
-          }
-        }
-
-        button {
-          background: ${props => props.theme.colors["purple-dark"]};
+        .cart-button {
+          background: ${props => props.theme.colors["purple"]};
           color: ${props => props.theme.colors.white};
           border-radius: 8px;
           border: 0;
@@ -111,6 +89,10 @@ export const CoffeeCardItemContainer = styled.li`
           display: flex;
           align-items: center;
           justify-content: center;
+
+          &:hover {
+            background: ${props => props.theme.colors["purple-dark"]};
+          }
         }
       }
     }
