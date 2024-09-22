@@ -1,8 +1,8 @@
-import { CreditCard, CurrencyDollar, MapPinLine, Trash } from "@phosphor-icons/react";
+import { CurrencyDollar, MapPinLine } from "@phosphor-icons/react";
 import { Header } from "../../components/Header";
 import { CheckoutContainer } from "./styles";
-import americano from '../../assets/americano.svg'
-import { Counter } from "../../components/Counter";
+import { PaymentTypes } from "../../components/PaymentTypes";
+import { CoffeeCard } from "../../components/CoffeeCard";
 
 export function Checkout() {
   return (
@@ -41,41 +41,13 @@ export function Checkout() {
                 <span>O pagamento é feito na entrega. Escolha a forma que deseja pagar</span>
               </div>
             </div>
-            <div className="checkout-payment-types">
-              <button type="button" className="payment-type-button">
-                <CreditCard size={16} />
-                <span>Cartão de crédito</span>
-              </button>
-              <button type="button" className="payment-type-button">
-                <CreditCard size={16} />
-                <span>Cartão de crédito</span>
-              </button>
-              <button type="button" className="payment-type-button">
-                <CreditCard size={16} />
-                <span>Cartão de crédito</span>
-              </button>
-            </div>
+            <PaymentTypes />
           </div>
-        
-        
         </div>
         <div className="checkout-items">
           <h1>Cafés selecionados</h1>
           <div className="coffee-card-container">
-            <div className="coffee-card">
-              <img src={americano} alt="Pires e xícara com café" />
-              <div className="coffee-card-details">
-                <p>Expresso Tradicional</p>
-                <div className="coffee-card-actions">
-                  <Counter style={{ height: 32 }} />
-                  <button type="button">
-                    <Trash size={16} />
-                    <span>Remover</span>
-                  </button>
-                </div>
-              </div>
-              <strong>R$ 9,90</strong>
-            </div>
+            <CoffeeCard />
             <hr />
 
             <div className="coffee-card-items-resume">
