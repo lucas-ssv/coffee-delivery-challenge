@@ -1,5 +1,4 @@
 import { CurrencyDollar, MapPinLine } from "@phosphor-icons/react";
-import { Header } from "../../components/Header";
 import { CheckoutContainer } from "./styles";
 import { PaymentTypes } from "../../components/PaymentTypes";
 import { CoffeeCard } from "../../components/CoffeeCard";
@@ -7,7 +6,6 @@ import { CoffeeCard } from "../../components/CoffeeCard";
 export function Checkout() {
   return (
     <CheckoutContainer>
-      <Header />
       <section className="checkout">
         <div className="checkout-order">
           <h1>Complete seu pedido</h1>

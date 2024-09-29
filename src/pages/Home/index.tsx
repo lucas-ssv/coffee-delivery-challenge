@@ -16,7 +16,6 @@ import arabe from '../../assets/arabe.svg'
 import irlandes from '../../assets/irlandes.svg'
 
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react";
-import { Header } from "../../components/Header";
 import { CoffeeCardList } from "./components/CoffeeCardList";
 
 export interface Coffee {
@@ -131,7 +130,6 @@ export function Home() {
 
   return (
     <HomeContainer>
-      <Header />
       <div className="intro">
         <div>
           <h1>Encontre o café perfeito para qualquer hora do dia</h1>

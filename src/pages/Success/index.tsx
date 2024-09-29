@@ -1,12 +1,10 @@
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
-import { Header } from "../../components/Header";
 import { Icon, SuccessContainer } from "./styles";
 import successImage from '../../assets/success.svg'
 
 export function Success() {
   return (
     <SuccessContainer>
-      <Header />
       <h1 className="title">Uhu! Pedido confirmado</h1>
       <p className="subtitle">Agora é só aguardar que logo o café chegará até você</p>
       <div className="order-container">

@@ -13,11 +13,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    width: calc(100% - 304px);
-    margin: 0 auto;
-    padding: 0 1rem;
     background: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors["base-title"]};
     -webkit-font-smoothing: antialiased;
   }
 
