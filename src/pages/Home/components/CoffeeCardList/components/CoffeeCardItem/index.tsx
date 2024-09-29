@@ -1,24 +1,32 @@
 import { ShoppingCartSimple } from "@phosphor-icons/react";
-import capuccino from '../../../../../../assets/capuccino.svg'
 import { CoffeeCardItemContainer } from "./styles";
 import { Counter } from "../../../../../../components/Counter";
+import { Coffee } from "../../../..";
 
-export function CoffeeCardItem() {
+interface Props {
+  item: Coffee
+}
+
+export function CoffeeCardItem({ item }: Props) {
   return (
     <CoffeeCardItemContainer>
       <div className="card-image">
-        <img src={capuccino} alt="" />
+        <img src={item.coffeeImage} alt="" />
       </div>
-      <div className="card-tag">
-        <span>Tradicional</span>
+      <div className="tags">
+        {item.tags.map(tag => (
+          <div key={tag} className="card-tag">
+            <span>{tag}</span>
+          </div>
+        ))}
       </div>
       <div className="card-content">
-        <strong>Expresso Tradicional</strong>
-        <p>O tradicional café feito com água quente e grãos moídos</p>
+        <strong>{item.name}</strong>
+        <p>{item.description}</p>
         <div className="card-buy">
           <span className="card-product-value">
             R$
-            <span>9,90</span>
+            <span>{item.price}</span>
           </span>
           <div className="card-actions">
             <Counter style={{ height: 38 }} />

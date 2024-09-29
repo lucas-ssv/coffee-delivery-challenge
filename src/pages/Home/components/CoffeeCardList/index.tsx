@@ -1,10 +1,17 @@
+import { Coffee } from '../..'
 import { CoffeeCardItem } from './components/CoffeeCardItem'
 import { CoffeeCardContainer } from './styles'
 
-export function CoffeeCardList() {
+interface Props {
+  items: Coffee[]
+}
+
+export function CoffeeCardList({ items }: Props) {
   return (
     <CoffeeCardContainer>
-      <CoffeeCardItem />
+      {items.map(item => (
+        <CoffeeCardItem key={item.slug} item={item} />
+      ))}
     </CoffeeCardContainer>
   )
 }
