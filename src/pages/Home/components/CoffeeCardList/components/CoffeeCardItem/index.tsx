@@ -8,6 +8,11 @@ interface Props {
 }
 
 export function CoffeeCardItem({ item }: Props) {
+  const formatPrice = (price: number) => new Intl.NumberFormat('pt-br', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(price)
+
   return (
     <CoffeeCardItemContainer>
       <div className="card-image">
@@ -26,7 +31,7 @@ export function CoffeeCardItem({ item }: Props) {
         <div className="card-buy">
           <span className="card-product-value">
             R$
-            <span>{item.price}</span>
+            <span>{formatPrice(item.price)}</span>
           </span>
           <div className="card-actions">
             <Counter style={{ height: 38 }} />
