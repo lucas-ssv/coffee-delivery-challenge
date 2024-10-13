@@ -3,14 +3,14 @@ import { CoffeeCardItem } from './components/CoffeeCardItem'
 import { CoffeeCardContainer } from './styles'
 
 interface Props {
-  items: Coffee[]
+  products: Coffee[]
 }
 
-export function CoffeeCardList({ items }: Props) {
+export function CoffeeCardList({ products }: Props) {
   return (
     <CoffeeCardContainer>
-      {items.map(item => (
-        <CoffeeCardItem key={item.slug} item={item} />
+      {products.map(product => (
+        <CoffeeCardItem key={product.slug} product={product} />
       ))}
     </CoffeeCardContainer>
   )

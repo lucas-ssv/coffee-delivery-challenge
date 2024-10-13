@@ -167,7 +167,7 @@ export function Home() {
       </div>
       <section>
         <h1>Nossos cafés</h1>
-        <CoffeeCardList items={coffeeList} />  
+        <CoffeeCardList products={coffeeList} />  
       </section>
     </HomeContainer>
   )

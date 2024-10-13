@@ -4,10 +4,10 @@ import { Counter } from "../../../../../../components/Counter";
 import { Coffee } from "../../../..";
 
 interface Props {
-  item: Coffee
+  product: Coffee
 }
 
-export function CoffeeCardItem({ item }: Props) {
+export function CoffeeCardItem({ product }: Props) {
   const formatPrice = (price: number) => new Intl.NumberFormat('pt-br', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -16,25 +16,25 @@ export function CoffeeCardItem({ item }: Props) {
   return (
     <CoffeeCardItemContainer>
       <div className="card-image">
-        <img src={item.coffeeImage} alt="" />
+        <img src={product.coffeeImage} alt="" />
       </div>
       <div className="tags">
-        {item.tags.map(tag => (
+        {product.tags.map(tag => (
           <div key={tag} className="card-tag">
             <span>{tag}</span>
           </div>
         ))}
       </div>
       <div className="card-content">
-        <strong>{item.name}</strong>
-        <p>{item.description}</p>
+        <strong>{product.name}</strong>
+        <p>{product.description}</p>
         <div className="card-buy">
           <span className="card-product-value">
             R$
-            <span>{formatPrice(item.price)}</span>
+            <span>{formatPrice(product.price)}</span>
           </span>
           <div className="card-actions">
-            <Counter style={{ height: 38 }} />
+            <Counter product={product} style={{ height: 38 }} />
             <button className="cart-button" type="button">
               <ShoppingCartSimple size={22} weight="fill" />
             </button>
