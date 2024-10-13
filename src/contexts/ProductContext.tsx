@@ -4,6 +4,7 @@ import { productReducer } from "../reducers/productReducer";
 type ProductContextProps = {
   productsAmount: number
   addProduct: (product: Product) => void
+  removeProduct: (slug: string) => void
 }
 
 export const ProductContext = createContext({} as ProductContextProps)
@@ -29,8 +30,12 @@ export function ProductProvider({ children }: Props) {
     dispatch({ type: 'ADD_PRODUCT', payload: { product } })
   }
 
+  function removeProduct(slug: string) {
+    dispatch({ type: 'REMOVE_PRODUCT', payload: { slug } })
+  }
+
   return (
-    <ProductContext.Provider value={{ productsAmount: product.productsAmount, addProduct }}>
+    <ProductContext.Provider value={{ productsAmount: product.productsAmount, addProduct, removeProduct }}>
       {children}
     </ProductContext.Provider>
   )

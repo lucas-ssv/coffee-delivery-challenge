@@ -6,10 +6,8 @@ type ProductState = {
 }
 
 type ProductAction = {
-  type: 'ADD_PRODUCT'
-  payload: {
-    product: Product
-  }
+  type: 'ADD_PRODUCT' | 'REMOVE_PRODUCT'
+  payload: any
 }
 
 export function productReducer(state: ProductState, action: ProductAction) {
@@ -42,6 +40,30 @@ export function productReducer(state: ProductState, action: ProductAction) {
       return {
         products,
         productsAmount: state.productsAmount + 1
+      };
+    }
+  }
+
+  if (type === 'REMOVE_PRODUCT') {
+    const existingProductIndex = state.products.findIndex(
+      (product) => product.slug === payload.slug
+    );
+
+    if (existingProductIndex !== -1) {
+      const updatedProduct = {
+        ...state.products[existingProductIndex],
+        amount: state.products[existingProductIndex].amount - 1
+      };
+
+      const products = [
+        ...state.products.slice(0, existingProductIndex),
+        updatedProduct,
+        ...state.products.slice(existingProductIndex + 1)
+      ];
+
+      return {
+        products,
+        productsAmount: state.productsAmount - 1
       };
     }
   }

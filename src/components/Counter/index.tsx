@@ -9,7 +9,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 }
 
 export function Counter({ product, ...rest }: Props) {
-  const { addProduct } = useContext(ProductContext)
+  const { addProduct, removeProduct } = useContext(ProductContext)
   const [productAmount, setProductAmount] = useState<number>(0)
 
   function handleAddProduct(product: Coffee) {
@@ -25,9 +25,16 @@ export function Counter({ product, ...rest }: Props) {
     addProduct(newProduct)
   }
 
+  function handleRemoveProduct(slug: string) {
+    if (productAmount > 0) {
+      setProductAmount(productAmount => productAmount - 1)
+      removeProduct(slug)
+    }
+  }
+
   return (
     <CounterContainer {...rest}>
-      <button type="button">
+      <button type="button" onClick={() => handleRemoveProduct(product.slug)}>
         <Minus size={14} />
       </button>
       <span>{productAmount}</span>
