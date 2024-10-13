@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useReducer } from "react";
+import { createContext, ReactNode, useMemo, useReducer } from "react";
 import { productReducer } from "../reducers/productReducer";
+import { getProductsOnStorage } from "../storage/productStorage";
 
 type ProductContextProps = {
   productsAmount: number
@@ -21,9 +22,17 @@ export type Product = {
 }
 
 export function ProductProvider({ children }: Props) {
+  const productStorage = useMemo(() => {
+    const products = getProductsOnStorage()
+    const productsAmount = products.reduce((acc, product) => acc + product.amount, 0)
+    return {
+      products,
+      productsAmount
+    }
+  }, [])
   const [product, dispatch] = useReducer(productReducer, {
-    products: [] as Product[],
-    productsAmount: 0
+    products: productStorage.products || [] as Product[],
+    productsAmount: productStorage.productsAmount || 0
   })
 
   function addProduct(product: Product) {
