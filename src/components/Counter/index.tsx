@@ -24,8 +24,11 @@ export function Counter({ product, ...rest }: Props) {
     const newProduct: Product = {
       slug: product.slug,
       name: product.name,
+      description: product.description,
+      tags: product.tags,
       price: product.price,
-      amount: 1
+      coffeeImage: product.coffeeImage,
+      amount: 1,
     }
 
     addProduct(newProduct)

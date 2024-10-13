@@ -2,17 +2,13 @@ import { ShoppingCartSimple } from "@phosphor-icons/react";
 import { CoffeeCardItemContainer } from "./styles";
 import { Counter } from "../../../../../../components/Counter";
 import { Coffee } from "../../../..";
+import { formatPrice } from "../../../../../../utils/formatPrice";
 
 interface Props {
   product: Coffee
 }
 
 export function CoffeeCardItem({ product }: Props) {
-  const formatPrice = (price: number) => new Intl.NumberFormat('pt-br', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(price)
-
   return (
     <CoffeeCardItemContainer>
       <div className="card-image">

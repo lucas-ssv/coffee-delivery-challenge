@@ -1,8 +1,10 @@
 import { createContext, ReactNode, useMemo, useReducer } from "react";
 import { productReducer } from "../reducers/productReducer";
 import { getProductsOnStorage } from "../storage/productStorage";
+import { Coffee } from "../pages/Home";
 
 type ProductContextProps = {
+  products: Product[]
   productsAmount: number
   addProduct: (product: Product) => void
   removeProduct: (slug: string) => void
@@ -14,10 +16,7 @@ type Props = {
   children: ReactNode
 }
 
-export type Product = {
-  slug: string
-  name: string
-  price: number
+export type Product = Coffee & {
   amount: number
 }
 
@@ -44,7 +43,7 @@ export function ProductProvider({ children }: Props) {
   }
 
   return (
-    <ProductContext.Provider value={{ productsAmount: product.productsAmount, addProduct, removeProduct }}>
+    <ProductContext.Provider value={{ products: product.products, productsAmount: product.productsAmount, addProduct, removeProduct }}>
       {children}
     </ProductContext.Provider>
   )

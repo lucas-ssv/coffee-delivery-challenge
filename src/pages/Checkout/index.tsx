@@ -2,8 +2,16 @@ import { CurrencyDollar, MapPinLine } from "@phosphor-icons/react";
 import { CheckoutContainer } from "./styles";
 import { PaymentTypes } from "../../components/PaymentTypes";
 import { CoffeeCard } from "../../components/CoffeeCard";
+import { useContext } from "react";
+import { ProductContext } from "../../contexts/ProductContext";
+import { formatPrice } from "../../utils/formatPrice";
 
 export function Checkout() {
+  const { products } = useContext(ProductContext)
+  const totalItemsPrice = products.reduce((acc, product) => acc + product.price * product.amount, 0)
+  const orderPrice = 3.5
+  const totalOrder = totalItemsPrice + orderPrice
+
   return (
     <CheckoutContainer>
       <section className="checkout">
@@ -45,21 +53,25 @@ export function Checkout() {
         <div className="checkout-items">
           <h1>Cafés selecionados</h1>
           <div className="coffee-card-container">
-            <CoffeeCard />
-            <hr />
+            {products.map((product) => (
+              <div key={product.slug}>
+                <CoffeeCard product={product} />
+                <hr />
+              </div>
+            ))}
 
             <div className="coffee-card-items-resume">
               <div>
                 <p>Total de itens</p>
-                <p>R$ 29,70</p>
+                <p>R$ {formatPrice(totalItemsPrice)}</p>
               </div>
               <div>
                 <p>Entrega</p>
-                <p>R$ 29,70</p>
+                <p>R$ {formatPrice(orderPrice)}</p>
               </div>
               <div>
                 <strong>Total</strong>
-                <strong>R$ 29,70</strong>
+                <strong>R$ {formatPrice(totalOrder)}</strong>
               </div>
             </div>
 
