@@ -54,6 +54,20 @@ export const CheckoutContainer = styled.main`
   
         .complement {
           grid-area: complement;
+          position: relative;
+
+          p {
+            font-size: ${(props) => props.theme.fonts.roboto["text-xs"]}px;
+            color: ${(props) => props.theme.colors["base-label"]};
+            font-style: italic;
+            position: absolute;
+            right: 0.75rem;
+            top: calc(50% - 8px);
+          }
+
+          input {
+            width: 100%;
+          }
         }
   
         .neighborhood {

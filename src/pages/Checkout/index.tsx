@@ -31,7 +31,10 @@ export function Checkout() {
                 <input type="text" className="postal-code" placeholder="CEP" />
                 <input type="text" className="street" placeholder="Rua" />
                 <input type="number" className="number" placeholder="Número" />
-                <input type="text" className="complement" placeholder="Complemento" />
+                <div className="complement">
+                  <p>Opcional</p>
+                  <input type="text" placeholder="Complemento" />
+                </div>
                 <input type="text" className="neighborhood" placeholder="Bairro" />
                 <input type="text" className="city" placeholder="Cidade" />
                 <input type="text" className="uf" placeholder="UF" />
