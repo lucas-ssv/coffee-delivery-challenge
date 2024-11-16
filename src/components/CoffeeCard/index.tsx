@@ -2,13 +2,15 @@ import { Trash } from "@phosphor-icons/react";
 import { Counter } from "../Counter";
 import { CoffeeCardContainer } from "./styles";
 import { formatPrice } from "../../utils/formatPrice";
-import { Product } from "../../contexts/ProductContext";
+import { Product, ProductContext } from "../../contexts/ProductContext";
+import { useContext } from "react";
 
 type Props = {
   product: Product
 }
 
 export function CoffeeCard({ product }: Props) {
+  const { deleteProduct } = useContext(ProductContext)
   const totalProductPrice = product.price * product.amount
 
   return (
@@ -18,7 +20,7 @@ export function CoffeeCard({ product }: Props) {
         <p>{product.name}</p>
         <div className="coffee-card-actions">
           <Counter product={product} style={{ height: 32 }} />
-          <button type="button">
+          <button type="button" onClick={() => deleteProduct(product.slug)}>
             <Trash size={16} />
             <span>Remover</span>
           </button>

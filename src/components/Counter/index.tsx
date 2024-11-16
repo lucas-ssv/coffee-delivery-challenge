@@ -1,20 +1,16 @@
 import { Minus, Plus } from "@phosphor-icons/react";
 import { CounterContainer } from "./styles";
-import { HTMLAttributes, useContext, useMemo, useState } from "react";
+import { HTMLAttributes, useContext, useState } from "react";
 import { Coffee } from "../../pages/Home";
 import { Product, ProductContext } from "../../contexts/ProductContext";
-import { getProductsOnStorage } from "../../storage/productStorage";
 
 type Props = HTMLAttributes<HTMLElement> & {
   product: Coffee
 }
 
 export function Counter({ product, ...rest }: Props) {
-  const { addProduct, removeProduct } = useContext(ProductContext)
-  const productAmountStorage = useMemo(() => {
-    const products = getProductsOnStorage()
-    return products.find((p) => p.slug === product.slug)?.amount
-  }, [])
+  const { products, addProduct, removeProduct } = useContext(ProductContext)
+  const productAmountStorage = products?.find((p) => p.slug === product.slug)?.amount
 
   const [productAmount, setProductAmount] = useState<number>(productAmountStorage || 0)
 

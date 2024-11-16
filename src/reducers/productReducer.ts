@@ -1,5 +1,5 @@
 import { Product } from "../contexts/ProductContext";
-import { addProductsOnStorage, removeProductOnStorage } from "../storage/productStorage";
+import { addProductsOnStorage, removeAllProductOnStorage, removeProductOnStorage } from "../storage/productStorage";
 
 type ProductState = {
   products: Product[]
@@ -7,7 +7,7 @@ type ProductState = {
 }
 
 type ProductAction = {
-  type: 'ADD_PRODUCT' | 'REMOVE_PRODUCT'
+  type: 'ADD_PRODUCT' | 'REMOVE_PRODUCT' | 'DELETE_PRODUCT'
   payload: any
 }
 
@@ -79,5 +79,23 @@ export function productReducer(state: ProductState, action: ProductAction) {
     }
   }
 
+  if (type === 'DELETE_PRODUCT') {
+    const products = state.products
+    let productsAmount = state.productsAmount
+    const productIndex = products.findIndex((product) => product.slug === payload.slug)
+
+    if (productIndex >= 0) {
+      const productAmount = products[productIndex].amount
+      productsAmount -= productAmount
+      products.splice(productIndex, 1)
+
+      removeAllProductOnStorage(payload.slug)
+    }
+    return {
+      products,
+      productsAmount
+    }
+  }
+  
   throw Error('Unknown action.');
 }

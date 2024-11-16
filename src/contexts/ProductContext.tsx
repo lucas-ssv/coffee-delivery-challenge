@@ -8,6 +8,7 @@ type ProductContextProps = {
   productsAmount: number
   addProduct: (product: Product) => void
   removeProduct: (slug: string) => void
+  deleteProduct: (slug: string) => void
 }
 
 export const ProductContext = createContext({} as ProductContextProps)
@@ -42,8 +43,12 @@ export function ProductProvider({ children }: Props) {
     dispatch({ type: 'REMOVE_PRODUCT', payload: { slug } })
   }
 
+  function deleteProduct(slug: string) {
+    dispatch({ type: 'DELETE_PRODUCT', payload: { slug } })
+  }
+
   return (
-    <ProductContext.Provider value={{ products: product.products, productsAmount: product.productsAmount, addProduct, removeProduct }}>
+    <ProductContext.Provider value={{ products: product.products, productsAmount: product.productsAmount, addProduct, removeProduct, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   )

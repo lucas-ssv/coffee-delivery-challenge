@@ -24,3 +24,13 @@ export function removeProductOnStorage(slug: string) {
     addProductsOnStorage(products)
   }
 }
+
+export function removeAllProductOnStorage(slug: string) {
+  const products: Product[] = JSON.parse(localStorage.getItem(productKey)!)
+  const productIndex = products.findIndex((product) => product.slug === slug)
+
+  if (productIndex >= 0) {
+    products.splice(productIndex, 1)
+  }
+  addProductsOnStorage(products)
+}
