@@ -1,8 +1,12 @@
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
 import { Icon, SuccessContainer } from "./styles";
 import successImage from '../../assets/success.svg'
+import { useLocation } from "react-router-dom";
 
 export function Success() {
+  const location = useLocation()
+  const { street, neighborhood, paymentType } = location.state
+
   return (
     <SuccessContainer>
       <h1 className="title">Uhu! Pedido confirmado</h1>
@@ -15,9 +19,9 @@ export function Success() {
             </Icon>
             <div className="order-description">
               <p>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em <strong>{street}</strong>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>{neighborhood}</p>
             </div>
           </div>
           <div className="order-info">
@@ -39,7 +43,7 @@ export function Success() {
               <p>
                 Pagamento na entrega
               </p>
-              <strong>Cartão de Crédito</strong>
+              <strong>{paymentType}</strong>
             </div>
           </div>
         </div>

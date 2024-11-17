@@ -185,6 +185,11 @@ export const CheckoutContainer = styled.main`
           &:hover {
             background: ${props => props.theme.colors["yellow-dark"]};
           }
+
+          &:disabled {
+            background: ${props => props.theme.colors["base-hover"]};
+            cursor: not-allowed;
+          }
         }
 
         hr {

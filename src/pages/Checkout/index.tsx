@@ -2,15 +2,43 @@ import { CurrencyDollar, MapPinLine } from "@phosphor-icons/react";
 import { CheckoutContainer } from "./styles";
 import { PaymentTypes } from "../../components/PaymentTypes";
 import { CoffeeCard } from "../../components/CoffeeCard";
-import { useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { formatPrice } from "../../utils/formatPrice";
+import { useNavigate } from "react-router-dom";
 
 export function Checkout() {
-  const { products } = useContext(ProductContext)
+  const { products, removeAllProducts } = useContext(ProductContext)
+  const navigation = useNavigate()
+
+  const [postalCode, setPostalCode] = useState('')
+  const [street, setStreet] = useState('')
+  const [number, setNumber] = useState('')
+  const [complement, setComplement] = useState('')
+  const [neighborhood, setNeighborhood] = useState('')
+  const [city, setCity] = useState('')
+  const [uf, setUf] = useState('')
+  const [paymentType, setPaymentType] = useState('')
+
   const totalItemsPrice = products.reduce((acc, product) => acc + product.price * product.amount, 0)
   const orderPrice = 3.5
   const totalOrder = totalItemsPrice + orderPrice
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+
+    const customStreet = `${street}, ${number}`
+    const customNeighborhood = `${neighborhood} - ${city}, ${uf}`
+    navigation('/success', {
+      state: {
+        street: customStreet,
+        neighborhood: customNeighborhood,
+        paymentType
+      }
+    })
+
+    removeAllProducts()
+  }
 
   return (
     <CheckoutContainer>
@@ -26,18 +54,18 @@ export function Checkout() {
               </div>
             </div>
 
-            <form>
+            <form id="form-delivery" onSubmit={handleSubmit}>
               <div className="form-grid-inputs">
-                <input type="text" className="postal-code" placeholder="CEP" />
-                <input type="text" className="street" placeholder="Rua" />
-                <input type="number" className="number" placeholder="Número" />
+                <input type="text" className="postal-code" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} placeholder="CEP" />
+                <input type="text" className="street" value={street} onChange={(e) => setStreet(e.target.value)} placeholder="Rua" />
+                <input type="number" className="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Número" />
                 <div className="complement">
                   <p>Opcional</p>
-                  <input type="text" placeholder="Complemento" />
+                  <input type="text" value={complement} onChange={(e) => setComplement(e.target.value)} placeholder="Complemento" />
                 </div>
-                <input type="text" className="neighborhood" placeholder="Bairro" />
-                <input type="text" className="city" placeholder="Cidade" />
-                <input type="text" className="uf" placeholder="UF" />
+                <input type="text" value={neighborhood} onChange={(e) => setNeighborhood(e.target.value)} className="neighborhood" placeholder="Bairro" />
+                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} className="city" placeholder="Cidade" />
+                <input type="text" value={uf} onChange={(e) => setUf(e.target.value)} className="uf" placeholder="UF" />
               </div>
             </form>
           </div>
@@ -50,7 +78,7 @@ export function Checkout() {
                 <span>O pagamento é feito na entrega. Escolha a forma que deseja pagar</span>
               </div>
             </div>
-            <PaymentTypes />
+            <PaymentTypes paymentType={paymentType} onPaymentType={setPaymentType} />
           </div>
         </div>
         <div className="checkout-items">
@@ -78,7 +106,7 @@ export function Checkout() {
               </div>
             </div>
 
-            <button type="button" className="coffee-card-confirm-order-button">Confirmar pedido</button>
+            <button type="submit" form="form-delivery" className="coffee-card-confirm-order-button" disabled={!products.length}>Confirmar pedido</button>
           </div>
         </div>
       </section>

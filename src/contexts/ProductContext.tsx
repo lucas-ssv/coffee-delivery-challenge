@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useMemo, useReducer } from "react";
 import { productReducer } from "../reducers/productReducer";
-import { getProductsOnStorage } from "../storage/productStorage";
+import { addProductsOnStorage, getProductsOnStorage } from "../storage/productStorage";
 import { Coffee } from "../pages/Home";
 
 type ProductContextProps = {
@@ -8,6 +8,7 @@ type ProductContextProps = {
   productsAmount: number
   addProduct: (product: Product) => void
   removeProduct: (slug: string) => void
+  removeAllProducts: () => void
   deleteProduct: (slug: string) => void
 }
 
@@ -24,7 +25,7 @@ export type Product = Coffee & {
 export function ProductProvider({ children }: Props) {
   const productStorage = useMemo(() => {
     const products = getProductsOnStorage()
-    const productsAmount = products.reduce((acc, product) => acc + product.amount, 0)
+    const productsAmount = products?.reduce((acc, product) => acc + product.amount, 0)
     return {
       products,
       productsAmount
@@ -43,12 +44,17 @@ export function ProductProvider({ children }: Props) {
     dispatch({ type: 'REMOVE_PRODUCT', payload: { slug } })
   }
 
+  function removeAllProducts() {
+    dispatch({ type: 'REMOVE_ALL_PRODUCTS' })
+    addProductsOnStorage([])
+  }
+
   function deleteProduct(slug: string) {
     dispatch({ type: 'DELETE_PRODUCT', payload: { slug } })
   }
 
   return (
-    <ProductContext.Provider value={{ products: product.products, productsAmount: product.productsAmount, addProduct, removeProduct, deleteProduct }}>
+    <ProductContext.Provider value={{ products: product.products, productsAmount: product.productsAmount, addProduct, removeProduct, removeAllProducts, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   )

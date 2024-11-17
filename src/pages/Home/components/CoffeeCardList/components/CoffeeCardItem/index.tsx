@@ -3,12 +3,15 @@ import { CoffeeCardItemContainer } from "./styles";
 import { Counter } from "../../../../../../components/Counter";
 import { Coffee } from "../../../..";
 import { formatPrice } from "../../../../../../utils/formatPrice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   product: Coffee
 }
 
 export function CoffeeCardItem({ product }: Props) {
+  const navigation = useNavigate()
+
   return (
     <CoffeeCardItemContainer>
       <div className="card-image">
@@ -31,7 +34,7 @@ export function CoffeeCardItem({ product }: Props) {
           </span>
           <div className="card-actions">
             <Counter product={product} style={{ height: 38 }} />
-            <button className="cart-button" type="button">
+            <button className="cart-button" type="button" onClick={() => navigation('/checkout')}>
               <ShoppingCartSimple size={22} weight="fill" />
             </button>
           </div>

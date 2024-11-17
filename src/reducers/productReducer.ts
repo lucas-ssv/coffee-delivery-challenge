@@ -7,8 +7,8 @@ type ProductState = {
 }
 
 type ProductAction = {
-  type: 'ADD_PRODUCT' | 'REMOVE_PRODUCT' | 'DELETE_PRODUCT'
-  payload: any
+  type: 'ADD_PRODUCT' | 'REMOVE_PRODUCT' | 'DELETE_PRODUCT' | 'REMOVE_ALL_PRODUCTS'
+  payload?: any
 }
 
 export function productReducer(state: ProductState, action: ProductAction) {
@@ -94,6 +94,13 @@ export function productReducer(state: ProductState, action: ProductAction) {
     return {
       products,
       productsAmount
+    }
+  }
+
+  if (type === 'REMOVE_ALL_PRODUCTS') {
+    return {
+      products: [],
+      productsAmount: 0
     }
   }
   

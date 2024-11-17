@@ -10,7 +10,7 @@ export const PaymentTypesContainer = styled.main`
   .payment-type-button {
     flex: 1;
     background: ${props => props.theme.colors["base-button"]};
-    border: 0;
+    border: 1px solid ${(props) => props.theme.colors["base-button"]};
     border-radius: 6px;
     padding: 1rem;
     cursor: pointer;
@@ -32,5 +32,10 @@ export const PaymentTypesContainer = styled.main`
       color: ${props => props.theme.colors["base-text"]};
       text-transform: uppercase;
     }
+  }
+
+  .actived {
+    background: ${(props) => props.theme.colors["purple-light"]};
+    border: 1px solid ${(props) => props.theme.colors.purple};
   }
 `
